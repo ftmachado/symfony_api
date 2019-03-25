@@ -5,12 +5,15 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MovieRepository")
- * @ApiResource()
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "title": "partial", "description": "partial", "category":"exact"})
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"movies"}}
+ * })
  */
 class Movie
 {
@@ -23,22 +26,26 @@ class Movie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"movies"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"movies"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"movies"})
      */
     private $releaseDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="fkMovies")
      * @ORM\JoinColumn(name="fk_movie", referencedColumnName="id", nullable=true)
+     * @Groups({"movies"})
      */
     private $category;
 

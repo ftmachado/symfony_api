@@ -8,3 +8,5 @@ api_platform:
             # page_parameter_name: pagina
             client_items_per_page: true #itemsPerPage=20
             # items_per_page_parameter: itensPorPagina
+    eager_loading:
+        enabled: false

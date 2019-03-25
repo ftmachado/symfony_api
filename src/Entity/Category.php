@@ -5,11 +5,14 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"movies"}}
+ * })
  */
 class Category
 {
@@ -22,11 +25,13 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"movies"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Movie", mappedBy="category")
+     * @Groups({"movies"})
      */
     private $fkMovies;
 
