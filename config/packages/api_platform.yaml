@@ -10,3 +10,9 @@ api_platform:
             # items_per_page_parameter: itensPorPagina
     eager_loading:
         enabled: false
+    
+    swagger:
+         api_keys:
+             apiKey:
+                name: Authorization
+                type: header
