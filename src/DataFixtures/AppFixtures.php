@@ -15,6 +15,7 @@ class AppFixtures extends Fixture
             "Terror", "Romance", "Comedy", "Action", "Science Fiction"
         ];
 
+        
         foreach ($categories as $item) {
             $category = new Category();
             $category->setName($item);
