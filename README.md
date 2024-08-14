@@ -9,6 +9,7 @@ This project represents the online course "Criando uma API Rest com Symfony 4" f
 - Edit conection data in file `.env`, string DATABASE_URL with your `user:pass@host:port`
 - Create a database with default config: `php bin/console doctrine:database:create` 
 - Create the structure using migrations: `php bin/console doctrine:migrations:migrate` 
+- Populate the database with preset data: `php bin/console doctrine:fixtures:load`
 2. Run server `php -S 127.0.0.1:8000 -t public`
 3. Generate the public and private keys used for signing JWT tokens. [See more Lexik:Jwt:Bundle](https://github.com/lexik/LexikJWTAuthenticationBundle/blob/3.x/Resources/doc/index.rst#getting-started)
 
@@ -23,6 +24,12 @@ setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
 5. Generate a token to use apis with user created: `php bin/console lexik:jwt:generate-token username`
 6. Use the APIs Endpoints with `Authorization: Bearer {token}` header
  
+## Configuring logs with Elasticsearch
+1. Configure the client in `config/packages/framework.yaml: es.client`
+2. Configure the service handler in `config/services.yaml: ElasticsearchLogstashHandler`
+3. Active the monolog handler in your environment log config: i.e `config/packages/dev/monolog.yaml`
+4. The host, user, password from Elasticsearch put in `.env`
+
 # Built With
 
 * [Symfony 4](https://symfony.com/) - The web framework used
